@@ -1,0 +1,359 @@
+/*
+ Theme Name:   GeneratePress Child
+ Description:  GeneratePress child theme for kimoota.net
+ Template:     generatepress
+ Version:      1.0.0
+*/
+
+
+
+/* ここに先ほどの見出しCSSや吹き出しCSSを追記していきます */
+
+@charset "UTF-8";
+
+
+html, body {
+    overflow-x: clip !important; /* ページ全体の横スクロールを死守して禁止 */
+    width: 100% !important;
+    position: relative;
+}
+
+/* 欧文フォントの微調整（必要に応じて） */
+.appeal-title, .appeal-message, .mega-search-input {
+    font-feature-settings: "palt"; /* プロポーショナルメトリクスで英字の詰めを綺麗にする */
+}
+
+/* 例：記事本文の余白と行間を「なろう」級に読みやすくする */
+.entry-content {
+    line-height: 1.8;
+    margin-top: 2em;
+    padding: 0 20px; /* スマホ時の横余白 */
+}
+
+/* 見出しの上の余白をガッツリ取る */
+.entry-content h2 {
+    margin-top: 2.5em;
+    margin-bottom: 1em;
+}
+/* GeneratePressのコメントエリア全体を非表示にする */
+#comments {
+    display: none !important;
+}
+
+/* ----------------------------------------------------------------             
+  1. 基本カラー変数（サーモンピンク & ダークトーン）
+----------------------------------------------------------------- */
+:root {
+    --accent-color: #fa8072; /* サーモンピンク */
+    --base-bg: #1a1a1a;
+    --text-color: #eeeeee;
+}
+/* ============================================================
+   Syntax Highlight
+   ============================================================ */
+
+/* 外枠の定義 */
+/* プランB：最強の等幅フォントスタック */
+pre {
+    position: relative !important;
+    background: #282c34 !important;
+    color: #abb2bf !important;
+    padding: 45px 1.5em 1.5em !important;
+    border-radius: 8px !important;
+    margin: 1.5em 0 !important;
+    overflow: auto !important;
+    /* 1. 開発者が入れていそうなモダンフォント 
+       2. 各OSの標準等幅 
+       3. 最終手段の monospace 
+    */
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Source Code Pro', 
+                 'Menlo', 'Monaco', 'Consolas', 'Ubuntu Mono', 
+                 'Noto Sans Mono', 'Courier New', monospace !important;
+    font-size: 14px !important; /* 少し小さめにするとより「コード感」が出ます */
+    line-height: 1.6 !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ボタンのデザイン */
+.copy-code-button {
+    position: absolute !important;
+    top: 10px !important;
+    right: 10px !important;
+    z-index: 100 !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #E9967A !important; /* サーモンピンクでアクセント */
+    padding: 4px 10px !important;
+    font-size: 11px !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+}
+
+.copy-code-button:hover {
+    background: #E9967A !important;
+    color: #fff !important;
+}
+
+/* 書体を強制的に等幅フォント（JetBrains Mono等）にする */
+pre, pre *, code.hljs, .hljs {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', Courier, monospace !important;
+    font-variant-ligatures: none !important;
+    -webkit-font-smoothing: antialiased;
+    text-transform: none !important; /* 変な大文字化などを防ぐ */
+}
+
+/* 特定の要素（コメントや記号）が白飛びするのを防ぐ */
+.hljs-punctuation, .hljs-operator { color: #abb2bf !important; } /* 記号を標準色に */
+.hljs-meta { color: #61afef !important; } /* $ や # などのプロンプト記号の色を固定 */
+
+
+
+/* ============================================================
+   1. レイアウト：管理バー・ヘッダーとの重なり解消
+   ============================================================ */
+
+/* ログイン時（管理バーあり）の調整 */
+.admin-bar .no-results.not-found {
+    margin-top: 32px !important;
+}
+
+/* 404/検索結果なしページの全体コンテナ */
+.no-results.not-found .inside-article {
+    display: flex !important;
+    flex-direction: column !important;
+    padding-top: 40px !important;
+    background: transparent !important;
+}
+
+/* タイトル調整 */
+.no-results.not-found .entry-header {
+    position: static !important;
+    margin-bottom: 30px !important;
+    text-align: center !important;
+}
+
+/* ============================================================
+   2. 巨大検索バー構造（右端ボタン固定）
+   ============================================================ */
+
+/* フォーム外枠 */
+.no-results .search-form,
+.search-results .search-form {
+    display: flex !important;
+    align-items: center !important;
+    max-width: 800px !important;
+    width: 100% !important;
+    margin: 20px auto !important;
+    background-color: #e6e6e6 !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+    border: none !important;
+}
+
+/* ラベル（ボタンを右端へ） */
+.search-results .search-form label,
+.no-results .search-form label {
+    flex-grow: 1 !important;
+    display: flex !important;
+    margin: 0 !important;
+}
+
+/* 入力欄 */
+.search-results .search-form .search-field,
+.no-results .search-form .search-field {
+    width: 100% !important;
+    flex-grow: 1 !important;
+    font-size: 1.2rem !important;
+    background: transparent !important;
+    color: #333 !important;
+    border: none !important;
+    outline: none !important;
+    padding: 20px 25px !important;
+}
+
+/* 検索ボタン本体 */
+.search-results .search-form .search-submit,
+.no-results .search-form .search-submit {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    align-self: stretch !important;
+    flex-shrink: 0 !important;
+    min-width: 80px !important;
+    padding: 0 !important;
+    background-color: #ff8c69 !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: background-color 0.2s !important;
+    
+    /* モバイルSafari等の外観リセット */
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    border-radius: 0 !important;
+}
+
+/* 虫眼鏡アイコン（ここが修正ポイント） */
+.search-results .search-form .search-submit svg,
+.no-results .search-form .search-submit svg {
+    width: 32px !important;
+    height: 32px !important;
+    fill: #ffffff !important;
+    display: block !important;
+    opacity: 1 !important;
+}
+
+/* アイコンの親要素スパン：非表示にせず、サイズだけ無効化する */
+.gp-icon.icon-search {
+    display: inline-flex !important; /* noneにすると中身も消えるのでflexに */
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* 不要なテキストのみを隠す */
+.screen-reader-text {
+    display: none !important;
+}
+
+/* ホバー */
+.search-results .search-form .search-submit:hover {
+    background-color: #ff7f50 !important;
+}
+
+/* ============================================================
+   3. モバイル・最終調整 (1080px以下)
+   ============================================================ */
+@media screen and (max-width: 1080px) {
+    .admin-bar .no-results.not-found {
+        margin-top: 46px !important;
+    }
+
+    /* モバイル時も絶対に角丸を許さない */
+    .search-results .search-form,
+    .search-results .search-form .search-submit,
+    .no-results .search-form .search-submit {
+        border-radius: 8px !important; /* 親の丸み */
+    }
+    
+    .search-results .search-form .search-submit {
+        border-radius: 0 !important; /* ボタン自体は四角 */
+        min-width: 64px !important;
+    }
+
+    .search-results .search-form .search-submit svg {
+        width: 26px !important;
+        height: 26px !important;
+        fill: #ffffff !important;
+    }
+}
+
+/* 非ログイン時のヘッダーめり込み防止 */
+:not(.admin-bar) .no-results.not-found,
+:not(.admin-bar) .search-results {
+    padding-top: 60px !important;
+}
+
+
+/* --- 入力欄：フォーカス時の「おもてなし」 --- */
+.search-results .search-form .search-field,
+.no-results .search-form .search-field {
+    transition: box-shadow 0.3s ease, background-color 0.3s ease !important;
+}
+
+.search-results .search-form .search-field:focus,
+.no-results .search-form .search-field:focus {
+    background-color: #fcfcfc !important; /* ほんの少しだけ白く */
+    box-shadow: inset 0 0 5px rgba(255, 140, 105, 0.2) !important; /* 内側にボタン色の微かな光 */
+}
+
+/* --- ボタン：クリック時の「手応え」 --- */
+.search-results .search-form .search-submit:active,
+.no-results .search-form .search-submit:active {
+    transform: scale(0.96) !important; /* ほんの少しだけ凹む */
+    background-color: #ff6b3d !important; /* 押した瞬間だけ少し濃く */
+    transition: transform 0.1s !important;
+}
+
+
+
+
+
+/* 1. 全体のコンテナを1カラムに変更 */
+.post-navigation {
+    display: block !important;
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 1px solid #333;
+}
+
+/* 2. 左右のブロックを縦並び・全幅に */
+.nav-previous, .nav-next {
+    display: block !important;
+    width: 100% !important;
+    margin-bottom: 20px !important;
+}
+
+/* 3. リンク本体（通常時） */
+.nav-previous a, .nav-next a {
+    display: block !important;
+    padding: 25px !important;
+    background: #2a2a2a !important;
+    border: 1px solid #333 !important;
+    border-radius: 8px !important;
+    color: #eee !important;
+    text-decoration: none !important;
+    transition: all 0.25s ease !important;
+    position: relative;
+    box-sizing: border-box;
+} /* ← ここをスッキリさせました */
+
+/* 4. ホバー時の演出（ピンク枠復活・見切れ回避） */
+.nav-previous a:hover, .nav-next a:hover {
+    background: #333 !important;
+    border-color: #ff2d55 !important;
+    color: #ff2d55 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* 5. ホバー時の微細な動き（paddingシフト） */
+.nav-previous a:hover {
+    padding-left: 30px !important;
+}
+.nav-next a:hover {
+    padding-right: 30px !important;
+}
+
+/* 6. 既存アイコンは非表示 */
+.post-navigation .gp-icon {
+    display: none !important;
+}
+
+/* 7. ラベル（PREVIOUS / NEXT） */
+.nav-previous a::before {
+    content: "← PREVIOUS";
+    display: block;
+    font-size: 0.75rem;
+    color: #888;
+    margin-bottom: 10px;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+}
+
+.nav-next a::before {
+    content: "NEXT →";
+    display: block;
+    font-size: 0.75rem;
+    color: #888;
+    margin-bottom: 10px;
+    text-align: right;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+}
+
+/* ホバー時にラベルの色も少し明るく */
+.nav-previous a:hover::before,
+.nav-next a:hover::before {
+    color: #bbb;
+}
+
