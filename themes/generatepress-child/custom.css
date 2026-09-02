@@ -1,0 +1,13 @@
+.wrap {
+  opacity: 0.9;
+}
+#edit-slug-box.hide-if-no-js {
+  background-color: #FFF;
+}
+#wpwrap {
+  background-image: url("conohawall.jpg")  !important;
+  background-position: center center  !important;
+  background-repeat: no-repeat  !important;
+  background-attachment: fixed  !important;
+  background-size: cover  !important;
+}

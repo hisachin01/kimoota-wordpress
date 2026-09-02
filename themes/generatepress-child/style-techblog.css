@@ -1,0 +1,55 @@
+/*
+ * きもおた・わーどぷれす専用 CSS
+ * 共通 style.css から分離したサイト固有部分
+ */
+
+/* ----------------------------------------------------------------             
+  サイドバーウィジェットモバイル非表示
+----------------------------------------------------------------- */
+@media (max-width: 768px) {
+    #custom_html-13,
+    #custom_html-14,
+    #custom_html-16 {
+        display: none !important;
+    }
+}
+
+/* ----------------------------------------------------------------             
+  このはウィジェット（きもおた・わーどぷれす専用）
+----------------------------------------------------------------- */
+
+/* --- ConoHaウィジェット インタラクション --- */
+
+/* バナー画像の親要素（aタグ） */
+.kimoota-conoha-widget a {
+    display: block;
+    overflow: hidden;
+    border-radius: 4px; /* サイト全体の角丸と合わせる */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    line-height: 0; /* 画像下の謎の隙間対策 */
+}
+
+/* 画像自体の設定 */
+.kimoota-conoha-widget img {
+    transition: filter 0.3s ease;
+    border: 1px solid #333; /* 静止時は背景に馴染ませる */
+}
+
+/* ホバー時の挙動：浮き上がり＋光の透過感 */
+.kimoota-conoha-widget a:hover {
+    transform: translateY(-4px); /* 少し上に浮く */
+    box-shadow: 0 10px 20px rgba(233, 150, 122, 0.2); /* サーモンピンクの微かな影 */
+}
+
+.kimoota-conoha-widget a:hover img {
+    filter: brightness(1.1); /* ほんの少し明るくして「生きた」感じに */
+    border-color: #E9967A; /* 枠線を差し色に変化させる */
+}
+
+/* テキスト部分への配慮 */
+.kimoota-conoha-widget p {
+    font-size: 12px;
+    margin-top: 12px;
+    color: #999;
+    line-height: 1.5;
+}

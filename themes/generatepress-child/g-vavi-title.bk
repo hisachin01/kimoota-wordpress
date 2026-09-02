@@ -1,0 +1,20 @@
+/* ============================================================
+  モバイルタイトル左寄せ (1080px以下)
+   ============================================================ */
+/* --- モバイル（959px以下）でタイトルを左寄せにする --- */
+@media (max-width: 1080px) {
+    .site-header .inside-header {
+        /* コンテナ内の並びを「左端（タイトル）と右端（ボタン群）」に強制分割 */
+        justify-content: flex-start !important; 
+    }
+
+    /* タイトルロゴが中央に引っ張られるのを防ぎ、左端に固定する */
+    .site-branding,
+    .site-logo,
+    .navigation-branding {
+        margin-right: auto !important;
+        margin-left: 0 !important;
+        text-align: left !important;
+        padding-left: 15px; /* 左端に適度な余白を作る */
+    }
+}
